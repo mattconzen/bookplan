@@ -4,6 +4,7 @@ body{
 }
 
 .card {
+  cursor: move;
   width:320px;
 }
 .card-book-details{

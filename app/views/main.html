@@ -5,14 +5,16 @@
     It'll take about <br/>{{getDaysLeft()}} days.
   </h4>
 
-  <div ng-repeat="book in books">
-      <div class="card panel panel-default panel-body">
-          <img class="card-book-image img-responsive pull-left" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
-          <div class="card-book-details">
-            <span class="badge pull-right">{{book.pages}}pgs</span>
-            <h4><strong>{{book.title}}</strong></h4>
-            <p>{{book.author}} - {{book.year}}</p>
+  <div ui-sortable ng-model="books">
+    <div ng-repeat="book in books">
+        <div class="card panel panel-default panel-body">
+            <img class="card-book-image img-responsive pull-left" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
+            <div class="card-book-details">
+              <span class="badge pull-right">{{book.pages}}pgs</span>
+              <h4><strong>{{book.title}}</strong></h4>
+              <p>{{book.author}} - {{book.year}}</p>
+          </div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 </div>
