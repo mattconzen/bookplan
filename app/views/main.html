@@ -1,16 +1,18 @@
 <div class="container" ng-controller="MainCtrl">
-  <h1>BookPlan - {{getTotalPages()}}</h1>
+  <h4>
+    You're currently reading <strong>{{getTotalPages()}}pgs</strong>
+    at about <strong>{{pagesPerDay}}pgs</strong> per day.
+    It'll take about <br/>{{getDaysLeft()}} days.
+  </h4>
+
   <div ng-repeat="book in books">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <span>{{book.name}}</span>
-          <span class="badge pull-right">{{book.length}}pp</span>
-        </div>
-        <div class="panel-body">
-          <img class="img-responsive" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
-          {{book.author}} - {{book.year}}
+      <div class="card panel panel-default panel-body">
+          <img class="card-book-image img-responsive pull-left" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
+          <div class="card-book-details">
+            <span class="badge pull-right">{{book.pages}}pgs</span>
+            <h4><strong>{{book.title}}</strong></h4>
+            <p>{{book.author}} - {{book.year}}</p>
         </div>
       </div>
   </div>
-
 </div>

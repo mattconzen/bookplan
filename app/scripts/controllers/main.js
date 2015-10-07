@@ -9,23 +9,27 @@
  */
 angular.module('bookPlanApp')
   .controller('MainCtrl', function ($scope) {
+    $scope.pagesPerDay = 14;
     $scope.books = [
-              { name: 'Hopscotch',
+              { title: 'Hopscotch',
                 author: 'Julio Cortazar',
                 cover: 'images\\hopscotch.jpg',
-                length: 576,
+                pages: 576,
                 year: 1966 },
-              { name: 'Gravity\'s Rainbow',
+              { title: 'Gravity\'s Rainbow',
                 author: 'Thomas Pynchon',
                 cover: 'images\\gravitysrainbow.jpg',
-                length: 776,
+                pages: 776,
                 year: 1973 }
     ];
-    $scope.getTotalPages = function($scope) {
+    $scope.getTotalPages = function() {
       var totalLength = 0;
       for (var i = 0; i < $scope.books.length; i++) {
-        totalLength += $scope.books[i].length;
+        totalLength += $scope.books[i].pages;
       }
       return totalLength;
+    };
+    $scope.getDaysLeft = function(){
+      return Math.round($scope.getTotalPages() / $scope.pagesPerDay);
     };
   });

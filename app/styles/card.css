@@ -1,0 +1,15 @@
+/* Stylesheet for book cards used in card lists */
+body{
+  font-family:'Open Sans',sans-serif;
+}
+
+.card {
+  width:320px;
+}
+.card-book-details{
+  font-family:'Open Sans',sans-serif;
+}
+
+.card-book-image{
+  margin-right:15px;
+}
