@@ -23,7 +23,7 @@ body {
   margin-bottom: 10px;
 }
 /* Make the masthead heading the same height as the navigation */
-.header h3 {
+.header {
   margin-top: 0;
   margin-bottom: 0;
   line-height: 40px;
@@ -55,7 +55,7 @@ body {
 .marketing {
   margin: 40px 0;
 }
-.marketing p + h4 {
+.marketing {
   margin-top: 28px;
 }
 
