@@ -1,36 +1,41 @@
 <div class="container" ng-controller="MainCtrl">
   <h4>
-    You're currently reading <strong>{{getTotalPagesByShelf('reading')}}pgs</strong>
+    You're currently reading <strong>{{getTotalPagesByList(currentList)}}pgs</strong>
     at <strong>{{pagesPerDay}}pgs</strong> per day.
-    It'll take about <br/>{{getDaysLeftByShelf('reading')}} days.
+    It'll take about <br/>{{getDaysLeftByList(currentList)}} days.
   </h4>
   <br/>
-  <div ng-model="books">
-    <div class="currently-reading-list col-md-6">
+  <div class="list-container">
+    <div class="col-md-6">
       <h4>Currently Reading</h4>
-      <div ui-sortable ng-repeat="book in books | filter:shelf='reading'">
-          <div class="card panel panel-default panel-body">
-              <img class="card-book-image img-responsive pull-left" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
-              <div class="card-book-details">
-                <span class="badge pull-right">{{book.pages}}pgs</span>
-                <h4><strong>{{book.title}}</strong></h4>
-                <p>{{book.author}} - {{book.year}}</p>
-            </div>
-          </div>
-      </div>
+        <ul ui-sortable="sortableOptions" ng-model="currentList" class="card-list">
+            <li  ng-repeat="book in currentList" class="card panel panel-default panel-body">
+                <img class="card-book-image img-responsive pull-left" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
+                <div class="card-book-details">
+                  <span class="badge pull-right">{{book.pages}}pgs</span>
+                  <h4><strong>{{book.title}}</strong></h4>
+                  <p>{{book.author}} - {{book.year}}</p>
+              </div>
+            </li>
+        </ul>
     </div>
-    <div class="to-read-list col-md-6">
+    <div class="col-md-6">
       <h4>To Read</h4>
-      <div ui-sortable ng-repeat="book in books | filter:shelf='to read'">
-          <div class="card panel panel-default panel-body">
-              <img class="card-book-image img-responsive pull-left" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
-              <div class="card-book-details">
-                <span class="badge pull-right">{{book.pages}}pgs</span>
-                <h4><strong>{{book.title}}</strong></h4>
-                <p>{{book.author}} - {{book.year}}</p>
-            </div>
-          </div>
-      </div>
+        <ul class="card-list" ui-sortable="sortableOptions" ng-model="toReadList">
+            <li class="card panel panel-default panel-body"  ng-repeat="book in toReadList">
+                <img class="card-book-image img-responsive pull-left" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
+                <div class="card-book-details">
+                  <span class="badge pull-right">{{book.pages}}pgs</span>
+                  <h4><strong>{{book.title}}</strong></h4>
+                  <p>{{book.author}} - {{book.year}}</p>
+              </div>
+            </li>
+        </ul>
     </div>
   </div>
+</div>
+<div class="alert alert-info">
+    Current: {{currentList}}
+    <br/><br/>
+    ToRead: {{toReadList}}
 </div>

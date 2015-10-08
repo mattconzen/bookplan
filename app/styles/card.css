@@ -7,6 +7,13 @@ body{
   cursor: move;
   width:320px;
 }
+
+.card-list{
+  list-style-type:none;
+  margin: 0;
+  padding: 10px;
+}
+
 .card-book-details{
   font-family:'Open Sans',sans-serif;
 }

@@ -60,6 +60,14 @@ angular.module('bookPlanApp')
       return bookshelf;
     };
 
+    $scope.getTotalPagesByList = function(list) {
+      var totalLength = 0;
+      for (var i = 0; i < list.length; i++) {
+        totalLength += list[i].pages;
+      }
+      return totalLength;
+    };
+
     $scope.getTotalPagesByShelf = function(shelf) {
       var totalLength = 0;
       var books = $scope.getBooksByShelf(shelf);
@@ -69,7 +77,17 @@ angular.module('bookPlanApp')
       return totalLength;
     };
 
+    $scope.getDaysLeftByList = function(list){
+      return Math.round($scope.getTotalPagesByList(list) / $scope.pagesPerDay);
+    };
+
     $scope.getDaysLeftByShelf = function(shelf){
       return Math.round($scope.getTotalPagesByShelf(shelf) / $scope.pagesPerDay);
+    };
+
+    $scope.currentList = $scope.getBooksByShelf('reading');
+    $scope.toReadList = $scope.getBooksByShelf('to read');
+    $scope.sortableOptions = {
+      connectWith: '.card-list',
     };
   });
