@@ -1,0 +1,7 @@
+<img class="card-book-image img-responsive pull-left" ng-style="{height:'80px',width:'50px'}" ng-src="{{book.cover}}"/>
+<div class="card-book-details">
+  <span class="badge pull-right">{{book.pages}}pgs</span>
+  <h4><strong>{{book.title}}</strong></h4>
+  <p>{{book.author}} - {{book.year}}</p>
+  <span class="badge btn-danger pull-right" ng-click="removeBook(book)" aria-label="Remove">X</button>
+</div>
