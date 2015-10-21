@@ -92,7 +92,6 @@ angular.module('bookPlanApp')
                         year: '1900',
                         shelf: 'reading'
                       });
-      alert($scope.books.length);
     };
 
     $scope.removeBook = function(index){
