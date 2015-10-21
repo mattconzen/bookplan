@@ -85,6 +85,21 @@ angular.module('bookPlanApp')
       return Math.round($scope.getTotalPagesByShelf(shelf) / $scope.pagesPerDay);
     };
 
+    $scope.addBook = function() {
+      $scope.books.push({title: $scope.book.title,
+                        author: 'test',
+                        cover: 'test.jpg',
+                        year: '1900',
+                        shelf: 'reading'
+                      });
+    };
+
+    $scope.removeBook = function(index){
+      $scope.books = $scope.books.filter(function(item) {
+        return item.title !== index.title;
+      });
+    };
+
     $scope.currentList = $scope.getBooksByShelf('reading');
     $scope.toReadList = $scope.getBooksByShelf('to read');
     $scope.sortableOptions = {
