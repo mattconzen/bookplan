@@ -90,21 +90,8 @@ angular.module('bookPlanApp')
       return totalLength;
     };
 
-    $scope.getTotalPagesByShelf = function(shelf) {
-      var totalLength = 0;
-      var books = $scope.getBooksByShelf(shelf);
-      for (var i = 0; i < books.length; i++) {
-        totalLength += books[i].pages;
-      }
-      return totalLength;
-    };
-
     $scope.getDaysLeftByList = function(list){
       return Math.round($scope.getTotalPagesByList(list) / $scope.pagesPerDay);
-    };
-
-    $scope.getDaysLeftByShelf = function(shelf){
-      return Math.round($scope.getTotalPagesByShelf(shelf) / $scope.pagesPerDay);
     };
 
     $scope.addBook = function($item) {
@@ -119,7 +106,7 @@ angular.module('bookPlanApp')
 
     $scope.removeBook = function(index){
       $scope.books = $scope.books.filter(function(item) {
-        return item.title !== index.title;
+        return item !== index;
       });
     };
   });
