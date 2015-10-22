@@ -9,10 +9,6 @@ On first checkout, run `npm install` and `bower install`
 
 Run `grunt` for building and `grunt serve` for preview.
 
-## Dependencies
-
-- OAuth.io - https://oauth.io/dashboard
-
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
