@@ -110,7 +110,7 @@ angular.module('bookPlanApp')
     $scope.addBook = function($item) {
       $scope.books.push({title: $item.originalObject.volumeInfo.title,
                         author: $item.originalObject.volumeInfo.authors[0],
-                        cover: $item.originalObject.volumeInfo.imageLinks[0].smallThumbnail,
+                        cover: $item.originalObject.volumeInfo.imageLinks.smallThumbnail,
                         year: $item.originalObject.volumeInfo.publishedDate,
                         pages: $item.originalObject.volumeInfo.pageCount,
                         shelf: 'reading'
