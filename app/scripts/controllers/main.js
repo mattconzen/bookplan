@@ -10,6 +10,7 @@
 angular.module('bookPlanApp')
   .controller('MainCtrl', function ($scope) {
     $scope.pagesPerDay = 14;
+    $scope.newBookPlaceholder = '';
     $scope.books = [
               { title: 'Hopscotch',
                 author: 'Julio Cortazar',
@@ -85,11 +86,12 @@ angular.module('bookPlanApp')
       return Math.round($scope.getTotalPagesByShelf(shelf) / $scope.pagesPerDay);
     };
 
-    $scope.addBook = function() {
-      $scope.books.push({title: $scope.book.title,
-                        author: 'test',
-                        cover: 'test.jpg',
-                        year: '1900',
+    $scope.addBook = function($item) {
+      $scope.books.push({title: $item.originalObject.volumeInfo.title,
+                        author: $item.originalObject.volumeInfo.authors[0],
+                        cover: $item.originalObject.volumeInfo.imageLinks[0].smallThumbnail,
+                        year: $item.originalObject.volumeInfo.publishedDate,
+                        pages: $item.originalObject.volumeInfo.pageCount,
                         shelf: 'reading'
                       });
     };
