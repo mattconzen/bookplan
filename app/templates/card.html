@@ -2,6 +2,6 @@
 <div class="card-book-details">
   <span class="badge pull-right">{{book.pages}}pgs</span>
   <h4><strong>{{book.title}}</strong></h4>
-  <p>{{book.author}} - {{book.year}}</p>
+  <p>{{book.author}} - {{book.year | date:'yyyy'}}</p>
   <span class="badge btn-danger pull-right" ng-click="removeBook(book)" aria-label="Remove">X</button>
 </div>

@@ -5,12 +5,15 @@
     It'll take about <br/>{{getDaysLeftByList(currentList)}} days.
   </h4>
   <br/>
-  <form role="form" ng-submit="addBook()" class="add-new-book">
-    <input type="text" ng-model="book.title" placeholder="A Tale of Two Cities" class="form-control">
-    <span class="input-group-btn">
-      <button type="submit" class="btn btn-primary" value="Add">Add</button>
-    </span>
-  </form>
+    <angucomplete-alt id="newBook"
+              placeholder="Add a book"
+              pause="500"
+              selected-object="addBook"
+              remote-url="https://www.googleapis.com/books/v1/volumes?printType=books&q="
+              remote-url-data-field="items"
+              title-field="volumeInfo.title"
+              clear-selected="true"
+              input-class="form-control form-control-small"></angucomplete-alt>
   <div class="list-container">
     <div class="col-md-6">
       <h4>Currently Reading</h4>
