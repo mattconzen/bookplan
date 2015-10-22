@@ -50,6 +50,27 @@ angular.module('bookPlanApp')
                 shelf: 'to read' },
     ];
 
+
+    $scope.currentList = $scope.books.filter(function (book){
+      return (book.shelf === 'reading');
+    });
+
+    $scope.toReadList = $scope.books.filter(function (book){
+      return (book.shelf === 'to read');
+    });
+
+    $scope.sortableOptions = {
+      connectWith: '.card-list',
+    };
+
+    $scope.$watchCollection('books', function(newValue){
+                    $scope.currentList = newValue.filter(function (book){ return book.shelf === 'reading';});
+                    $scope.toReadList = newValue.filter(function (book){ return book.shelf === 'to read';});
+                    $scope.books = newValue;
+                    console.log($scope.currentList);
+                    console.log($scope.toReadList);
+                  });
+
     $scope.getBooksByShelf = function(shelf){
       var bookshelf=[];
       var books = $scope.books;
@@ -100,11 +121,5 @@ angular.module('bookPlanApp')
       $scope.books = $scope.books.filter(function(item) {
         return item.title !== index.title;
       });
-    };
-
-    $scope.currentList = $scope.getBooksByShelf('reading');
-    $scope.toReadList = $scope.getBooksByShelf('to read');
-    $scope.sortableOptions = {
-      connectWith: '.card-list',
     };
   });
