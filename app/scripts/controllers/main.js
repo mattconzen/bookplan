@@ -13,7 +13,7 @@ angular.module('bookPlanApp')
     $scope.books = $firebaseArray(ref.child('books'));
     $scope.currentList = [];
     $scope.toReadList = [];
-
+    $scope.pagesPerDay = 14;
     function updateShelves(){
       console.log('shelves updated');
       $scope.currentList = $scope.books.filter(function (book){return book.shelf === 'reading';});
