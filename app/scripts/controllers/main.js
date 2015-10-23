@@ -78,7 +78,7 @@ angular.module('bookPlanApp')
                         year: $item.originalObject.volumeInfo.publishedDate,
                         pages: $item.originalObject.volumeInfo.pageCount,
                         shelf: 'reading'
-                      }).then(updateShelves());
+                      }).then(function(){console.log('removed item'+$item.title); updateShelves();});
     };
 
     $scope.removeBook = function(item){
