@@ -8,68 +8,45 @@
  * Controller of the bookPlanApp
  */
 angular.module('bookPlanApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.pagesPerDay = 14;
-    $scope.newBookPlaceholder = '';
-    $scope.books = [
-              { title: 'Hopscotch',
-                author: 'Julio Cortazar',
-                cover: 'images\\hopscotch.jpg',
-                pages: 576,
-                year: 1966,
-                shelf: 'reading'},
-              { title: 'Gravity\'s Rainbow',
-                author: 'Thomas Pynchon',
-                cover: 'images\\gravitysrainbow.jpg',
-                pages: 776,
-                year: 1973,
-                shelf: 'reading'},
-              { title: 'Naked Lunch',
-                author: 'William S. Burroughs',
-                cover: 'images\\nakedlunch.jpg',
-                pages: 411,
-                year: 1966,
-                shelf: 'to read'},
-              { title: 'A Naked Singularity',
-                author: 'Sergio De La Pava',
-                cover: 'images\\nakedsingularity.jpg',
-                pages: 652,
-                year: 2011,
-                shelf: 'to read' },
-              { title: 'M Train',
-                author: 'Patti Smith',
-                cover: 'images\\mtrain.jpg',
-                pages: 205,
-                year: 2015,
-                shelf: 'to read' },
-              { title: 'Wolf in White Van',
-                author: 'John Darnielle',
-                cover: 'images\\wolfinwhitevan.jpg',
-                pages: 652,
-                year: 2011,
-                shelf: 'to read' },
-    ];
+  .controller('MainCtrl', function ($scope, $firebaseArray) {
+    var ref = new Firebase("https://luminous-inferno-477.firebaseio.com");
+    $scope.books = $firebaseArray(ref.child('books'));
+    $scope.currentList = [];
+    $scope.toReadList = [];
 
+    function updateShelves(){
+      console.log('shelves updated');
+      $scope.currentList = $scope.books.filter(function (book){return book.shelf === 'reading';});
+      $scope.toReadList = $scope.books.filter(function (book){return book.shelf === 'to read';});
+    }
 
-    $scope.currentList = $scope.books.filter(function (book){
-      return (book.shelf === 'reading');
-    });
-
-    $scope.toReadList = $scope.books.filter(function (book){
-      return (book.shelf === 'to read');
-    });
+    //Firebase event handlers to update shelves when DB changes
+    ref.on('value', updateShelves);
+    $scope.books.$loaded(updateShelves);
 
     $scope.sortableOptions = {
       connectWith: '.card-list',
+      update: function(e, ui){
+        switch (true) {
+          case e.target.classList.contains('toReadList'):
+              for (var i = 0; i < $scope.books.length; i++) {
+                if ($scope.books[i] === ui.item.sortable.model) {
+                  $scope.books[i].shelf='to read';
+                  $scope.books.$save(i);
+                }
+              }
+              break;
+          case e.target.classList.contains('readingList'):
+              for (var h = 0; h < $scope.books.length; h++) {
+                if ($scope.books[h] === ui.item.sortable.model) {
+                  $scope.books[h].shelf='reading';
+                  $scope.books.$save(h);
+                }
+              }
+              break;
+        }
+      }
     };
-
-    $scope.$watchCollection('books', function(newValue){
-                    $scope.currentList = newValue.filter(function (book){ return book.shelf === 'reading';});
-                    $scope.toReadList = newValue.filter(function (book){ return book.shelf === 'to read';});
-                    $scope.books = newValue;
-                    console.log($scope.currentList);
-                    console.log($scope.toReadList);
-                  });
 
     $scope.getBooksByShelf = function(shelf){
       var bookshelf=[];
@@ -95,7 +72,7 @@ angular.module('bookPlanApp')
     };
 
     $scope.addBook = function($item) {
-      $scope.books.push({title: $item.originalObject.volumeInfo.title,
+      $scope.books.$add({title: $item.originalObject.volumeInfo.title,
                         author: $item.originalObject.volumeInfo.authors[0],
                         cover: $item.originalObject.volumeInfo.imageLinks.smallThumbnail,
                         year: $item.originalObject.volumeInfo.publishedDate,

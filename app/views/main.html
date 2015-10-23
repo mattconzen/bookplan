@@ -17,14 +17,14 @@
   <div class="list-container">
     <div class="col-md-6">
       <h4>Currently Reading</h4>
-        <ul ui-sortable="sortableOptions" ng-model="currentList" class="card-list">
+        <ul class="card-list readingList" ui-sortable="sortableOptions" ng-model="currentList">
             <li ng-repeat="book in currentList" class="card panel panel-default panel-body" ng-include="'templates/card.html'">
             </li>
         </ul>
     </div>
     <div class="col-md-6">
       <h4>To Read</h4>
-        <ul class="card-list" ui-sortable="sortableOptions" ng-model="toReadList">
+        <ul class="card-list toReadList" ui-sortable="sortableOptions" ng-model="toReadList">
             <li ng-repeat="book in toReadList" class="card panel panel-default panel-body" ng-include="'templates/card.html'">
             </li>
         </ul>

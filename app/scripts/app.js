@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.sortable',
-    'angucomplete-alt'
+    'angucomplete-alt',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider
